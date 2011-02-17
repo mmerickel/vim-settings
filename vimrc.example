@@ -1,0 +1,9 @@
+fun! MySys()
+	return "mac"
+endfun
+
+set runtimepath=~/vim_local,$VIMRUNTIME
+source ~/vim_local/vimrc
+
+"let Tlist_Inc_Winwidth = 1
+"let Tlist_Ctags_Cmd = "/usr/local/ctags/bin/ctags"

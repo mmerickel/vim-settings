@@ -1,0 +1,5 @@
+*.pyc
+.svn
+.netrwhist
+tags
+tags-ja
