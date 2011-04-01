@@ -84,7 +84,7 @@ nnoremap <leader>h :nohlsearch<cr>
 nnoremap <leader>x :close!<cr>
 
 "Resize the window
-nnoremap <leader>el :set columns=180<cr>
+nnoremap <leader>el :set columns=220<cr>
 
 "Resize the window
 nnoremap <leader>ej :set columns=130<cr>
@@ -401,7 +401,7 @@ endif
 	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 	" => FuzzyFinder
 	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-	nnoremap <leader>ff :FufFile<cr>
+	nnoremap <leader>ff :FufFile **/<cr>
 	nnoremap <leader>fb :FufBuffer<cr>
 	nnoremap <leader>ft :FufTag<cr>
 	nnoremap <leader>fj :FufJumpList<cr>
@@ -426,7 +426,7 @@ endif
 	let NERDTreeIgnore = [
 	    \ '\.jpg$', '\.gif$', '\.png$', '\.hdr$', '\.img\.gz$'
 	    \ , '\.o$', '\.obj$', '\.so$', '\.a$', '\.dll$', '\.dylib$'
-	    \ , '\.svn$', '\.git$', '\.swp$', '\.pyc$' ]
+	    \ , '\.svn$', '\.git$', '\.swp$', '\.pyc$', '\.DS_Store' ]
 	let NERDTreeWinPos = "right"
 	let NERDTreeQuitOnOpen = 0
 	let NERDTreeHighlightCursorline = 1

@@ -12,6 +12,7 @@ augroup filetypedetect
 	au! BufRead,BufNewFile SConstruct setf python
 	au! BufRead,BufNewFile SConscript setf python
     au! BufRead,BufNewFile *.jt,*.jinja2 setf htmljinja
+    au! BufRead,BufNewFile *.as setf actionscript
 augroup END
 
 let &cpo = s:cpo_save
