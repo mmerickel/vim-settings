@@ -112,6 +112,9 @@ inoremap <C-e> <end>
 nnoremap <C-a> 0
 nnoremap <C-e> $
 
+"Simplify omnicompletion
+inoremap <C-space> <C-x><C-o>
+
 "Enable resaving a file as root with sudo
 cmap w!! w !sudo tee % >/dev/null
 
@@ -133,17 +136,17 @@ nnoremap <leader>n :set nu!<cr>
 
 " From an idea by Michael Naumann
 function! VisualSearch(direction) range
-	let l:saved_reg = @"
-	execute "normal! vgvy"
-	let l:pattern = escape(@", "\\/.*$^~[]")
-	let l:pattern = substitute(l:pattern, "\n$", "", "")
-	if a:direction == "b"
-		execute "normal ?" . l:pattern . "^M"
-	else
-		execute "normal /" . l:pattern . "^M"
-	endif
-	let @/ = l:pattern
-	let @" = l:saved_reg
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+    let l:pattern = escape(@", "\\/.*$^~[]")
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+    if a:direction == "b"
+        execute "normal ?" . l:pattern . "^M"
+    else
+        execute "normal /" . l:pattern . "^M"
+    endif
+    let @/ = l:pattern
+    let @" = l:saved_reg
 endfunction
 
 "Basically you press * or # to search for the current selection
@@ -152,12 +155,12 @@ vnoremap <silent> # :call VisualSearch("b")<CR>
 
 " Remap TAB to insert spaces if there is text preceding the cursor
 function! InsertTab()
-	if strpart(getline('.'), 0, col('.') - 1) =~ '\S'
-		let num_spaces = &ts - (virtcol('.') - 1) % &ts
-		return repeat(' ', num_spaces)
-	else
-		return "\<tab>"
-	endif
+    if strpart(getline('.'), 0, col('.') - 1) =~ '\S'
+        let num_spaces = &ts - (virtcol('.') - 1) % &ts
+        return repeat(' ', num_spaces)
+    else
+        return "\<tab>"
+    endif
 endfunction
 
 inoremap <tab> <c-r>=InsertTab()<cr>
@@ -199,53 +202,59 @@ function! RunShebang()
 endfunction
 nnoremap <leader>ex :call RunShebang()<CR>
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Autocommands
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if !exists("autocommands_loaded")
-	let autocommands_loaded = 1
+    let autocommands_loaded = 1
 
-	"Reload vimrc when GUI is started
-	if has("gui_running")
-		autocmd GUIEnter * source ~/vim_local/vimrc
-	endif
-	
-	"Switch CWD based on current file
-	autocmd BufEnter * lcd %:p:h
-	
-	"When vimrc is edited, reload it
-	autocmd BufWritePost vimrc source ~/vim_local/vimrc
-	
-	"Refresh syntax highlighting when buffer is entered or written
-	autocmd BufEnter * syntax sync fromstart
-	autocmd BufWritePost * syntax sync fromstart
-	
-	" Have Vim jump to the last position when reopening a file
-	autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-		\| exe "normal g'\"" | endif
+    "Reload vimrc when GUI is started
+    if has("gui_running")
+        autocmd GUIEnter * source ~/vim_local/vimrc
+    endif
+    
+    "Switch CWD based on current file
+    autocmd BufEnter * lcd %:p:h
+    
+    "When vimrc is edited, reload it
+    autocmd BufWritePost vimrc source ~/vim_local/vimrc
+    
+    "Refresh syntax highlighting when buffer is entered or written
+    autocmd BufEnter * syntax sync fromstart
+    autocmd BufWritePost * syntax sync fromstart
+    
+    " Have Vim jump to the last position when reopening a file
+    autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+        \| exe "normal g'\"" | endif
 
-	function! SetMakeProg()
-		set makeprg=make
-		if filereadable("Makefile")
-			set makeprg=make
-		elseif filereadable("SConstruct")
-			set makeprg=scons
-		endif
-	endfunction
-	autocmd BufEnter * call SetMakeProg()
+    function! SetMakeProg()
+        set makeprg=make
+        if filereadable("Makefile")
+            set makeprg=make
+        elseif filereadable("SConstruct")
+            set makeprg=scons
+        endif
+    endfunction
+    autocmd BufEnter * call SetMakeProg()
 
-	"Avoid showing whitespace while in insert mode
-	autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-	autocmd BufEnter,BufRead,BufNewFile,InsertLeave * match ExtraWhitespace /\s\+$/
+    "Avoid showing whitespace while in insert mode
+    autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+    autocmd BufEnter,BufRead,BufNewFile,InsertLeave * match ExtraWhitespace /\s\+$/
 
-	"Expand tabs
-	"autocmd BufEnter,BufNewFile *.c,*.cpp,*.h,*.hpp,*.cxx,*.hxx set expandtab
-	"autocmd BufLeave *.c,*.cpp,*.h,*.hpp,*.cxx,*.hxx set expandtab&
+    "Expand tabs
+    "autocmd BufEnter,BufNewFile *.c,*.cpp,*.h,*.hpp,*.cxx,*.hxx set expandtab
+    "autocmd BufLeave *.c,*.cpp,*.h,*.hpp,*.cxx,*.hxx set expandtab&
 
-	"Enable cindent
-	autocmd BufEnter,BufNewFile *.c,*.cpp,*.h,*.hpp,*.cxx,*.hxx,*.m,*.mm,*.java set cindent
-	autocmd BufLeave *.c,*.cpp,*.h,*.hpp,*.cxx,*.hxx,*.m,*.mm,*.java set cindent&
+    "Enable cindent
+    autocmd BufEnter,BufNewFile *.c,*.cpp,*.h,*.hpp,*.cxx,*.hxx,*.m,*.mm,*.java set cindent
+    autocmd BufLeave *.c,*.cpp,*.h,*.hpp,*.cxx,*.hxx,*.m,*.mm,*.java set cindent&
+
+    "Enable omni completion
+    autocmd FileType * set omnifunc=syntaxcomplete#Complete
+    autocmd FileType python set omnifunc=pythoncomplete#Complete
+    autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 endif
 
@@ -269,7 +278,7 @@ syntax on
 colorscheme molokai
 
 if has("gui_running") && MySys() == "mac"
-	set guifont=Inconsolata:h14
+    set guifont=Inconsolata:h14
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -335,10 +344,10 @@ set mat=2
 
 "Set window size if using a GUI
 if has("gui_running") && !exists('gui_resized')
-	let gui_resized = 1
+    let gui_resized = 1
 
-	set lines=60
-	set columns=90
+    set lines=60
+    set columns=90
 endif
 
 "Insert-mode completion option
@@ -368,91 +377,91 @@ match ExtraWhitespace /\s\+$/
 "2match OverLength /\%>80v.\+/
 
 if v:version >= 730
-	"Highlight the column to avoid long lines
-	set colorcolumn=85
+    "Highlight the column to avoid long lines
+    set colorcolumn=85
 
-	"Show the relative number instead of absolute line number
-	set relativenumber
+    "Show the relative number instead of absolute line number
+    set relativenumber
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-	" => Alternate
-	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-	nnoremap <leader>a :Ack 
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " => Alternate
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    nnoremap <leader>a :Ack 
 
-	let g:alternateNoDefaultAlternate = 1
+    let g:alternateNoDefaultAlternate = 1
 
-	"Add some support for ObjC
-	let g:alternateExtensions_m = "h"
-	let g:alternateExtensions_h = "m,c,cpp,cxx,cc,CC,tcc,txx"
-	let g:alternateExtensions_hpp = "cpp,cxx,cc,CC,tcc,txx"
-	let g:alternateExtensions_cpp = "h,hpp"
-	let g:alternateExtensions_tcc = "h,hpp"
-	let g:alternateExtensions_txx = "h,hpp"
+    "Add some support for ObjC
+    let g:alternateExtensions_m = "h"
+    let g:alternateExtensions_h = "m,c,cpp,cxx,cc,CC,tcc,txx"
+    let g:alternateExtensions_hpp = "cpp,cxx,cc,CC,tcc,txx"
+    let g:alternateExtensions_cpp = "h,hpp"
+    let g:alternateExtensions_tcc = "h,hpp"
+    let g:alternateExtensions_txx = "h,hpp"
 
-	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-	" => ctags
-	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-	set tags+=./tags,tags
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " => ctags
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    set tags+=./tags,tags
 
-	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-	" => FuzzyFinder
-	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-	nnoremap <leader>ff :FufFile **/<cr>
-	nnoremap <leader>fb :FufBuffer<cr>
-	nnoremap <leader>ft :FufTag<cr>
-	nnoremap <leader>fj :FufJumpList<cr>
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " => FuzzyFinder
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    nnoremap <leader>ff :FufFile **/<cr>
+    nnoremap <leader>fb :FufBuffer<cr>
+    nnoremap <leader>ft :FufTag<cr>
+    nnoremap <leader>fj :FufJumpList<cr>
 
-	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-	" => MatchIt
-	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " => MatchIt
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     source $VIMRUNTIME/macros/matchit.vim
 
-	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-	" => Minibufexpl
-	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-	let loaded_minibufexplorer = 1 " disable explorer
-	let g:miniBufExplMapWindowNavVim = 1
-	let g:miniBufExplMapCTabSwitchBufs = 1
-	let g:miniBufExplModSelTarget = 1
-	let g:miniBufExplSplitBelow = 1
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " => Minibufexpl
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    let loaded_minibufexplorer = 1 " disable explorer
+    let g:miniBufExplMapWindowNavVim = 1
+    let g:miniBufExplMapCTabSwitchBufs = 1
+    let g:miniBufExplModSelTarget = 1
+    let g:miniBufExplSplitBelow = 1
 
-	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-	" => NERDTree
-	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-	let NERDTreeIgnore = [
-	    \ '\.jpg$', '\.gif$', '\.png$', '\.hdr$', '\.img\.gz$'
-	    \ , '\.o$', '\.obj$', '\.so$', '\.a$', '\.dll$', '\.dylib$'
-	    \ , '\.svn$', '\.git$', '\.swp$', '\.pyc$', '\.DS_Store' ]
-	let NERDTreeWinPos = "right"
-	let NERDTreeQuitOnOpen = 0
-	let NERDTreeHighlightCursorline = 1
-	nnoremap <leader>dc :NERDTreeClose<cr>
-	nnoremap <leader>do :NERDTreeToggle<cr>
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " => NERDTree
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    let NERDTreeIgnore = [
+        \ '\.jpg$', '\.gif$', '\.png$', '\.hdr$', '\.img\.gz$'
+        \ , '\.o$', '\.obj$', '\.so$', '\.a$', '\.dll$', '\.dylib$'
+        \ , '\.svn$', '\.git$', '\.swp$', '\.pyc$', '\.DS_Store' ]
+    let NERDTreeWinPos = "right"
+    let NERDTreeQuitOnOpen = 0
+    let NERDTreeHighlightCursorline = 1
+    nnoremap <leader>dc :NERDTreeClose<cr>
+    nnoremap <leader>do :NERDTreeToggle<cr>
 
-	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-	" => Tag List
-	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-	let Tlist_Close_On_Select = 1
-	let Tlist_GainFocus_On_ToggleOpen = 1
-	let Tlist_Process_File_Always = 1
-	let Tlist_Inc_Winwidth = 0
-	let Tlist_WinWidth = 50
-	let Tlist_Display_Prototype = 0
-	nnoremap <leader>t :TlistToggle<cr>
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " => Tag List
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    let Tlist_Close_On_Select = 1
+    let Tlist_GainFocus_On_ToggleOpen = 1
+    let Tlist_Process_File_Always = 1
+    let Tlist_Inc_Winwidth = 0
+    let Tlist_WinWidth = 50
+    let Tlist_Display_Prototype = 0
+    nnoremap <leader>t :TlistToggle<cr>
 
-	"Add support for an ObjC-enabled ctags
-	let tlist_objc_settings = 'ObjC;P:protocols;i:interfaces;' .
-		\ 'I:implementations;M:instance methods;C:implementation methods;' .
-		\ 'Z:protocol methods;d:macro;g:enum;s:struct;u:union;t:typedef;' .
-		\ 'v:variable;f:function'
+    "Add support for an ObjC-enabled ctags
+    let tlist_objc_settings = 'ObjC;P:protocols;i:interfaces;' .
+        \ 'I:implementations;M:instance methods;C:implementation methods;' .
+        \ 'Z:protocol methods;d:macro;g:enum;s:struct;u:union;t:typedef;' .
+        \ 'v:variable;f:function'
 
-	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-	" => ShowMarks
-	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-	let g:showmarks_include='abcdefghijklmnopqrstuvwxyz'
-	let g:showmarks_ignore_type='hmrpq'
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " => ShowMarks
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    let g:showmarks_include='abcdefghijklmnopqrstuvwxyz'
+    let g:showmarks_ignore_type='hmrpq'
 
