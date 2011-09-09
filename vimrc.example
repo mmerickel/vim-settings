@@ -1,9 +1,8 @@
-fun! MySys()
-	return "mac"
-endfun
+let g:mysys = 'mac'
+let g:vim_local = '~/.vim'
 
-set runtimepath=~/vim_local,$VIMRUNTIME
-source ~/vim_local/vimrc
+exec 'set runtimepath='.g:vim_local.','.$VIMRUNTIME
+exec 'source '.g:vim_local.'/vimrc'
 
 "let Tlist_Inc_Winwidth = 1
 "let Tlist_Ctags_Cmd = "/usr/local/ctags/bin/ctags"

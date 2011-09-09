@@ -25,9 +25,6 @@
 "Get out of VI's compatible mode
 set nocompatible
 
-"Read helpfiles in vim_local
-helptags ~/vim_local/doc
-
 "Set how many lines of history VIM remembers
 set history=1000
 
@@ -125,7 +122,7 @@ noremap H g^
 noremap L g$
 
 "Fast editing of .vimrc
-nnoremap <leader>ev :e! ~/vim_local/vimrc<cr>
+nnoremap <leader>ev :exec ':e! '.g:vim_local.'/vimrc'<cr>
 
 "Display the end of lines and tabs as special characters
 set listchars=tab:>-,trail:+,eol:$
@@ -202,6 +199,9 @@ function! RunShebang()
 endfunction
 nnoremap <leader>ex :call RunShebang()<CR>
 
+"Switch CWD based on current file
+nnoremap <leader>cd lcd %:p:h<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Autocommands
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -210,14 +210,14 @@ if !exists("autocommands_loaded")
 
     "Reload vimrc when GUI is started
     if has("gui_running")
-        autocmd GUIEnter * source ~/vim_local/vimrc
+        autocmd GUIEnter * exec 'source '.g:vim_local.'/vimrc'
     endif
     
     "Switch CWD based on current file
-    autocmd BufEnter * lcd %:p:h
+    "autocmd BufEnter * lcd %:p:h
     
     "When vimrc is edited, reload it
-    autocmd BufWritePost vimrc source ~/vim_local/vimrc
+    autocmd BufWritePost vimrc exec 'source '.g:vim_local.'/vimrc'
     
     "Refresh syntax highlighting when buffer is entered or written
     autocmd BufEnter * syntax sync fromstart
@@ -277,7 +277,7 @@ syntax on
 "set background=dark
 colorscheme molokai
 
-if has("gui_running") && MySys() == "mac"
+if has("gui_running") && g:mysys == "mac"
     set guifont=Inconsolata:h14
 endif
 
@@ -403,6 +403,12 @@ endif
     let g:alternateExtensions_txx = "h,hpp"
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " => Coverage
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    nnoremap <leader>co :HiglightCoverage<CR>
+    nnoremap <leader>noco :HiglightCoverageOff<CR>
+
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " => ctags
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     set tags+=./tags,tags
@@ -435,7 +441,8 @@ endif
     let NERDTreeIgnore = [
         \ '\.jpg$', '\.gif$', '\.png$', '\.hdr$', '\.img\.gz$'
         \ , '\.o$', '\.obj$', '\.so$', '\.a$', '\.dll$', '\.dylib$'
-        \ , '\.svn$', '\.git$', '\.swp$', '\.pyc$', '\.DS_Store' ]
+        \ , '\.svn$', '\.git$', '\.swp$', '\.pyc$', '\.DS_Store'
+        \ , '\.class$' ]
     let NERDTreeWinPos = "right"
     let NERDTreeQuitOnOpen = 0
     let NERDTreeHighlightCursorline = 1
