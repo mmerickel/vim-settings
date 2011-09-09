@@ -274,8 +274,12 @@ syntax on
 "set background=dark
 colorscheme molokai
 
-if has("gui_running") && g:mysys == "mac"
-    set guifont=Inconsolata:h14
+if has("gui_running")
+    if g:mysys == "mac"
+        set guifont=Inconsolata:h14
+    elseif g:mysys == "win"
+        set guifont=Consolas:h12
+    endif
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

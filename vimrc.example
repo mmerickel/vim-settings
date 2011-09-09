@@ -1,7 +1,7 @@
 let g:mysys = 'mac'
 let g:vim_local = '~/.vim'
 
-exec 'set runtimepath='.g:vim_local.','.$VIMRUNTIME
+exec 'set runtimepath^='.g:vim_local
 exec 'source '.g:vim_local.'/vimrc'
 
 "let Tlist_Inc_Winwidth = 1
