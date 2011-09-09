@@ -9,14 +9,8 @@
 "   *> Colors and Fonts
 "   *> User Interface
 "   *> Plugin Configuration
-"   ------ *> Alternate
-"   ------ *> ctags
 "   ------ *> FuzzyFinder
-"   ------ *> MatchIt
-"   ------ *> Minibufexpl
 "   ------ *> NERDTree
-"   ------ *> Tag List
-"   ------ *> ShowMarks
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -24,6 +18,9 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Get out of VI's compatible mode
 set nocompatible
+
+"Invoke pathogen to load extra plugins
+call pathogen#infect(g:vim_local.'/bundle')
 
 "Set how many lines of history VIM remembers
 set history=1000
@@ -376,42 +373,18 @@ match ExtraWhitespace /\s\+$/
 "highlight OverLength ctermbg=red ctermfg=white guibg=red
 "2match OverLength /\%>80v.\+/
 
-if v:version >= 730
+if v:version >= 703
     "Highlight the column to avoid long lines
-    set colorcolumn=85
+    set colorcolumn=81
+	highlight ColorColumn ctermbg=8 guibg=#222222
 
     "Show the relative number instead of absolute line number
-    set relativenumber
+    "set relativenumber
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " => Alternate
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    nnoremap <leader>a :Ack 
-
-    let g:alternateNoDefaultAlternate = 1
-
-    "Add some support for ObjC
-    let g:alternateExtensions_m = "h"
-    let g:alternateExtensions_h = "m,c,cpp,cxx,cc,CC,tcc,txx"
-    let g:alternateExtensions_hpp = "cpp,cxx,cc,CC,tcc,txx"
-    let g:alternateExtensions_cpp = "h,hpp"
-    let g:alternateExtensions_tcc = "h,hpp"
-    let g:alternateExtensions_txx = "h,hpp"
-
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " => Coverage
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    nnoremap <leader>co :HiglightCoverage<CR>
-    nnoremap <leader>noco :HiglightCoverageOff<CR>
-
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " => ctags
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    set tags+=./tags,tags
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " => FuzzyFinder
@@ -420,20 +393,6 @@ endif
     nnoremap <leader>fb :FufBuffer<cr>
     nnoremap <leader>ft :FufTag<cr>
     nnoremap <leader>fj :FufJumpList<cr>
-
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " => MatchIt
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    source $VIMRUNTIME/macros/matchit.vim
-
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " => Minibufexpl
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    let loaded_minibufexplorer = 1 " disable explorer
-    let g:miniBufExplMapWindowNavVim = 1
-    let g:miniBufExplMapCTabSwitchBufs = 1
-    let g:miniBufExplModSelTarget = 1
-    let g:miniBufExplSplitBelow = 1
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " => NERDTree
@@ -448,27 +407,4 @@ endif
     let NERDTreeHighlightCursorline = 1
     nnoremap <leader>dc :NERDTreeClose<cr>
     nnoremap <leader>do :NERDTreeToggle<cr>
-
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " => Tag List
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    let Tlist_Close_On_Select = 1
-    let Tlist_GainFocus_On_ToggleOpen = 1
-    let Tlist_Process_File_Always = 1
-    let Tlist_Inc_Winwidth = 0
-    let Tlist_WinWidth = 50
-    let Tlist_Display_Prototype = 0
-    nnoremap <leader>t :TlistToggle<cr>
-
-    "Add support for an ObjC-enabled ctags
-    let tlist_objc_settings = 'ObjC;P:protocols;i:interfaces;' .
-        \ 'I:implementations;M:instance methods;C:implementation methods;' .
-        \ 'Z:protocol methods;d:macro;g:enum;s:struct;u:union;t:typedef;' .
-        \ 'v:variable;f:function'
-
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " => ShowMarks
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    let g:showmarks_include='abcdefghijklmnopqrstuvwxyz'
-    let g:showmarks_ignore_type='hmrpq'
 
