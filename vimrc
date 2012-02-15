@@ -405,7 +405,7 @@ endif
         \ '\.jpg$', '\.gif$', '\.png$', '\.hdr$', '\.gz$'
         \ , '\.o$', '\.obj$', '\.so$', '\.a$', '\.dll$', '\.dylib$'
         \ , '\.svn$', '\.git$', '\.swp$', '\.pyc$', '\.DS_Store'
-        \ , '\.class$' ]
+        \ , '\.class$', '__pycache__' ]
     let NERDTreeWinPos = "right"
     let NERDTreeQuitOnOpen = 0
     let NERDTreeHighlightCursorline = 1
