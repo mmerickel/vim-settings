@@ -19,6 +19,9 @@
 "Get out of VI's compatible mode
 set nocompatible
 
+"Invoke pathogen to load extra plugins
+call pathogen#infect(g:vim_local.'/bundle')
+
 "Set how many lines of history VIM remembers
 set history=1000
 
@@ -26,9 +29,6 @@ set history=1000
 filetype on
 filetype plugin on
 filetype indent on
-
-"Invoke pathogen to load extra plugins
-call pathogen#infect(g:vim_local.'/bundle')
 
 "Set to auto read when a file is changed from the outside
 set autoread
