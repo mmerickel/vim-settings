@@ -412,3 +412,10 @@ endif
     nnoremap <leader>dc :NERDTreeClose<cr>
     nnoremap <leader>do :NERDTreeToggle<cr>
 
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " => Syntastic
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_python_checker = 'pyflakes'
+    "let g:syntastic_enable_signs = 0
+
