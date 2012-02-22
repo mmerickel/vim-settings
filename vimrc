@@ -272,7 +272,7 @@ syntax on
 
 "Set background to light
 "set background=dark
-colorscheme molokai
+colorscheme solarized
 
 if has("gui_running")
     if g:mysys == "mac"
