@@ -109,15 +109,15 @@ hi WildMenu        guifg=#66D9EF guibg=#000000
 
 
 if s:molokai_original == 1
-   hi Normal          guifg=#F8F8F2 guibg=#272822
+   hi Normal          guifg=#F8F8F2 guibg=#000000
    hi Comment         guifg=#75715E
    hi CursorLine                    guibg=#3E3D32
    hi CursorColumn                  guibg=#3E3D32
    hi ColorColumn                   guibg=#3E3D32
    hi LineNr          guifg=#AAAAAA guibg=#3B3A32
-   hi NonText         guifg=#BCBCBC guibg=#3B3A32
+   hi NonText         guifg=#BCBCBC guibg=#000000
 else
-   hi Normal          guifg=#F8F8F2 guibg=#1B1D1E
+   hi Normal          guifg=#F8F8F2 guibg=#000000
    hi Folded          guifg=#666666 guibg=#1B1D1E
    hi Comment         guifg=#465457
    hi CursorLine                    guibg=#232728
@@ -126,7 +126,7 @@ else
    hi LineNr          guifg=#AAAAAA guibg=#1B1D1E
    
    " Invisible character colors
-   highlight NonText    guifg=#444444 guibg=#1a1c1d
+   highlight NonText    guifg=#444444 guibg=#000000
    highlight SpecialKey guifg=#444444 guibg=#1a1c1d
 end
 
@@ -210,10 +210,10 @@ if &t_Co > 255
    hi WarningMsg      ctermfg=231 ctermbg=238   cterm=bold
    hi WildMenu        ctermfg=81  ctermbg=16
 
-   hi Normal          ctermfg=252 ctermbg=233
+   hi Normal          ctermfg=252 ctermbg=000
    hi Comment         ctermfg=59
    hi CursorLine                  ctermbg=234   cterm=none
    hi CursorColumn                ctermbg=234
    hi LineNr          ctermfg=250 ctermbg=234
-   hi NonText         ctermfg=250 ctermbg=234
+   hi NonText         ctermfg=250 ctermbg=000
 end

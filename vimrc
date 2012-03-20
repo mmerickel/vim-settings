@@ -123,6 +123,7 @@ nnoremap <leader>ev :exec ':e! '.g:vim_local.'/vimrc'<cr>
 
 "Display the end of lines and tabs as special characters
 set listchars=tab:>-,trail:+,eol:$
+set nolist!
 nnoremap <silent> <leader>s :set nolist!<cr>
 
 "Toggle line numbers
@@ -407,8 +408,9 @@ endif
         \ , '\.svn$', '\.git$', '\.swp$', '\.pyc$', '\.DS_Store'
         \ , '\.class$', '__pycache__' ]
     let NERDTreeWinPos = "right"
-    let NERDTreeQuitOnOpen = 0
+    let NERDTreeQuitOnOpen = 1
     let NERDTreeHighlightCursorline = 1
+    let NERDTreeShowHidden = 1
     nnoremap <leader>dc :NERDTreeClose<cr>
     nnoremap <leader>do :NERDTreeToggle<cr>
 
