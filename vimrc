@@ -123,7 +123,7 @@ nnoremap <leader>ev :exec ':e! '.g:vim_local.'/vimrc'<cr>
 
 "Display the end of lines and tabs as special characters
 set listchars=tab:>-,trail:+,eol:$
-set nolist!
+set list
 nnoremap <silent> <leader>s :set nolist!<cr>
 
 "Toggle line numbers
@@ -381,7 +381,7 @@ match ExtraWhitespace /\s\+$/
 if v:version >= 703
     "Highlight the column to avoid long lines
     set colorcolumn=81
-	highlight ColorColumn ctermbg=8 guibg=#222222
+    highlight ColorColumn ctermbg=8 guibg=#222222
 
     "Show the relative number instead of absolute line number
     "set relativenumber
