@@ -408,9 +408,8 @@ endif
         \ , '\.svn$', '\.git$', '\.swp$', '\.pyc$', '\.DS_Store'
         \ , '\.class$', '__pycache__' ]
     let NERDTreeWinPos = "right"
-    let NERDTreeQuitOnOpen = 1
+    let NERDTreeQuitOnOpen = 0
     let NERDTreeHighlightCursorline = 1
-    let NERDTreeShowHidden = 1
     nnoremap <leader>dc :NERDTreeClose<cr>
     nnoremap <leader>do :NERDTreeToggle<cr>
 
