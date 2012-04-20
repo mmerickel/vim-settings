@@ -410,7 +410,9 @@ endif
     let NERDTreeWinPos = "right"
     let NERDTreeQuitOnOpen = 0
     let NERDTreeHighlightCursorline = 1
-    nnoremap <leader>dc :NERDTreeClose<cr>
+    let NERDTreeDirArrows = 0
+    let NERDTreeMinimalUI = 1
+    let NERDTreeShowHidden = 1
     nnoremap <leader>do :NERDTreeToggle<cr>
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
