@@ -20,6 +20,7 @@
 set nocompatible
 
 "Invoke pathogen to load extra plugins
+runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#infect(g:vim_local.'/bundle')
 
 "Set how many lines of history VIM remembers
