@@ -22,6 +22,7 @@ set nocompatible
 "Invoke pathogen to load extra plugins
 runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#infect(g:vim_local.'/bundle')
+call pathogen#helptags()
 
 "Set how many lines of history VIM remembers
 set history=1000
@@ -279,7 +280,7 @@ colorscheme molokai
 if has("gui_running")
     if g:mysys == "mac"
         set guifont=Inconsolata:h14
-    elseif g:mysys == "win"
+    elseif g:mysys == "dos"
         set guifont=Consolas:h12
     endif
 endif

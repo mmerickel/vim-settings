@@ -1,6 +1,8 @@
 let g:mysys = 'mac'
 let g:vim_local = '~/.vim'
 
+"Source the vimrc file from an arbitrary location.
+"Not necessary if the repo is already installed in VIM's runtime path.
 exec 'set runtimepath^='.g:vim_local
 exec 'source '.g:vim_local.'/vimrc'
 
