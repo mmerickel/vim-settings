@@ -19,7 +19,7 @@ Clone the repository
     git submodule init
     git submodule update
 
-or `C:\Users\USERNAME\_vimfiles` on Windows.
+or ``C:\Users\USERNAME\_vimfiles`` on Windows.
 
 Setup the vimrc
 ~~~~~~~~~~~~~~~
@@ -28,17 +28,17 @@ Copy the example vimrc file into VIM's runtime path::
 
     cp ${HOME}/vimrc.example ${HOME}/.vimrc
 
-or `C:\Users\USERNAME\_vimrc` on Windows.
+or ``C:\Users\USERNAME\_vimrc`` on Windows.
 
 Some settings are platform-specific and are turned on/off via::
 
     let g:mysys = 'mac'
 
-where valid options are arbitrary but currently `mac`, `dos` and `unix`
-are used.
+where valid options are arbitrary but currently ``mac``, ``dos`` and
+``unix`` are used.
 
 If the repository wasn't configured on VIM's runtime path, it can be placed
-on the path by setting `g:vim_local`::
+on the path by setting ``g:vim_local``::
 
     let g:vim_local = '~/.vim'
 
