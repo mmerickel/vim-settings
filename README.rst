@@ -1,5 +1,5 @@
-VIM Setup
-=========
+VIM Settings
+============
 
 This is a cross-platform configuration that allows for system-specific
 configuration without dirtying the repository.
