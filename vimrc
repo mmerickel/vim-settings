@@ -300,6 +300,12 @@ set wildmenu
 "Completion similarly to shell
 set wildmode=list:longest,full
 
+"Ignore some files
+set wildignore+=*.jpg,*.gif,*.png,*.hdr,*.gz
+set wildignore+=*.o,*.obj,*.so,*.a,*.dll,*.dylib
+set wildignore+=.DS_Store,Thumbs.db
+set wildignore+=*.svn,*.git,*.swp,*.pyc,*.class,*/__pycache__/*
+
 "Always show current position
 set ruler
 
@@ -394,12 +400,11 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " => FuzzyFinder
+    " => Ctrl-P
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    nnoremap <leader>ff :FufFile **/<cr>
-    nnoremap <leader>fb :FufBuffer<cr>
-    nnoremap <leader>ft :FufTag<cr>
-    nnoremap <leader>fj :FufJumpList<cr>
+    nnoremap <leader>ff :CtrlP<cr>
+    nnoremap <leader>fb :CtrlPBuffer<cr>
+    let g:ctrlp_switch_buffer = 1
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " => NERDTree
