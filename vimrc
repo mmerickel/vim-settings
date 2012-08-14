@@ -256,6 +256,8 @@ if !exists("autocommands_loaded")
     autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
     autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
+    autocmd FileType html,css,javascript setlocal sw=2 ts=2
+
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -405,6 +407,13 @@ endif
     nnoremap <leader>ff :CtrlP<cr>
     nnoremap <leader>fb :CtrlPBuffer<cr>
     let g:ctrlp_switch_buffer = 1
+
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " => HTML Indent
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    let g:html_indent_inctags = "html,body,head,tbody"
+    let g:html_indent_script1 = "inc"
+    let g:html_indent_style1 = "inc"
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " => NERDTree
