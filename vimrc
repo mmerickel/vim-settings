@@ -407,6 +407,7 @@ endif
     nnoremap <leader>ff :CtrlP<cr>
     nnoremap <leader>fb :CtrlPBuffer<cr>
     let g:ctrlp_switch_buffer = 1
+    let g:ctrlp_custom_ignore = 'env\|.tox'
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " => HTML Indent
