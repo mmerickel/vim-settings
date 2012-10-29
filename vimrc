@@ -131,6 +131,13 @@ nnoremap <silent> <leader>s :set nolist!<cr>
 "Toggle line numbers
 nnoremap <leader>n :set nu!<cr>
 
+"Yank text to the OS X clipboard
+noremap <leader>y "*y
+noremap <leader>yy "*Y
+
+" Preserve indentation while pasting text from the OS X clipboard
+noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
+
 " From an idea by Michael Naumann
 function! VisualSearch(direction) range
     let l:saved_reg = @"
@@ -200,7 +207,10 @@ endfunction
 nnoremap <leader>ex :call RunShebang()<CR>
 
 "Switch CWD based on current file
-nnoremap <leader>cd lcd %:p:h<CR>
+nnoremap <leader>cd cd %:p:h<CR>
+
+"Switch CWD based on current file only for current buffer
+nnoremap <leader>lcd lcd %:p:h<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Autocommands
