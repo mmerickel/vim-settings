@@ -12,7 +12,7 @@
 	url = https://github.com/vim-scripts/surround.vim
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
-	url = http://github.com/vim-scripts/Syntastic
+	url = https://github.com/scrooloose/syntastic
 [submodule "bundle/solarized"]
 	path = bundle/solarized
 	url = http://github.com/vim-scripts/Solarized
