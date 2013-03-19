@@ -373,7 +373,7 @@ if has("gui_running") && !exists('gui_resized')
 endif
 
 "Insert-mode completion option
-set completeopt=longest,menuone,preview
+set completeopt=menuone,longest,preview
 
 "Remove a lot of visual effects like scrollbar/menu/tabs from GUI
 set guioptions=a
