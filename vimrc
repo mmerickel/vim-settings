@@ -328,7 +328,7 @@ set cmdheight=1
 set number
 
 "Do not redraw when running macros .. lazyredraw
-set lazyredraw
+"set lazyredraw
 
 "Change buffer without saving
 set hidden
