@@ -34,3 +34,6 @@
 [submodule "bundle/acp"]
 	path = bundle/acp
 	url = https://github.com/vim-scripts/AutoComplPop.git
+[submodule "bundle/YouCompleteMe"]
+	path = bundle/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe
