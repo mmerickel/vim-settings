@@ -269,6 +269,8 @@ if !exists("autocommands_loaded")
     autocmd FileType html,css,javascript setlocal sw=2 ts=2
     autocmd FileType yaml setlocal sw=2 ts=2 et
 
+    autocmd FileType rst setlocal sw=2 ts=2 et
+
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
