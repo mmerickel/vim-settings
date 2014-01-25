@@ -16,6 +16,7 @@ augroup filetypedetect
     au! BufRead,BufNewFile *.sls setf yaml
     au! BufRead,BufNewFile *.md setf markdown
     au! BufRead,BufNewFile Vagrantfile setf ruby
+    au! BufRead,BufNewFile *.rs setf rust
 augroup END
 
 let &cpo = s:cpo_save
