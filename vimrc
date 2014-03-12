@@ -421,6 +421,8 @@ endif
     nnoremap <leader>fb :CtrlPBuffer<cr>
     let g:ctrlp_switch_buffer = 1
     let g:ctrlp_custom_ignore = 'env\|.tox'
+    let g:ctrlp_max_files = 0
+    let g:ctrlp_max_depth = 50
     "If the CWD has git submodules, try to set working path based on
     "the CWD instead of the local submodule
     let g:ctrlp_working_path_mode = 'wra'
