@@ -64,6 +64,9 @@ set cino=:0,g0
 "Wrap lines
 set wrap
 
+"Avoid adding 2 spaces when joining lines together.
+set nojoinspaces
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -134,6 +137,9 @@ nnoremap <leader>n :set nu!<cr>
 "Yank text to the OS X clipboard
 noremap <leader>y "*y
 noremap <leader>yy "*Y
+
+"Yank the entire buffer into the z register
+nnoremap <leader>ya ggvG$"zy
 
 " Preserve indentation while pasting text from the OS X clipboard
 noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
