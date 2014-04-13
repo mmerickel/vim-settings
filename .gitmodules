@@ -38,3 +38,7 @@
 	path = bundle/Dockerfile
 	url = https://github.com/ekalinin/Dockerfile.vim.git
     branch = master
+[submodule "bundle/go"]
+	path = bundle/go
+	url = https://github.com/jnwhiteh/vim-golang.git
+	branch = master
