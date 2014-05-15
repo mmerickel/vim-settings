@@ -42,3 +42,6 @@
 	path = bundle/go
 	url = https://github.com/jnwhiteh/vim-golang.git
 	branch = master
+[submodule "bundle/toml"]
+	path = bundle/toml
+	url = https://github.com/cespare/vim-toml.git
