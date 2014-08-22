@@ -294,8 +294,8 @@ let g:tex_flavor = "latex"
 "Turn on syntax highlighting
 syntax on
 
-"Set background to light
-"set background=dark
+"Set background
+set background=dark
 colorscheme molokai
 
 if has("gui_running")
