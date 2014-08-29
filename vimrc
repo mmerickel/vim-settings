@@ -59,13 +59,33 @@ set linebreak
 
 "Auto indent
 set autoindent
+set copyindent
 set cino=:0,g0
+
+"Use multiple of shiftwidth when indenting with '<' and '>'
+set shiftround
 
 "Wrap lines
 set wrap
 
 "Avoid adding 2 spaces when joining lines together.
 set nojoinspaces
+
+"Make < and > match
+set matchpairs+=<:>
+
+"Enable extended % matching
+runtime macros/matchit.vim
+
+"Allow the cursor to go everywhere
+set virtualedit=insert,onemore,block
+
+set formatoptions-=t
+set formatoptions+=c
+set formatoptions+=r
+set formatoptions+=q
+" Remove comment leaders when joining lines
+set formatoptions+=j
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Mappings
@@ -94,6 +114,9 @@ nnoremap <leader>eh :set columns=90<cr>
 "Remap ` and ' for marking
 nnoremap ' `
 nnoremap ` '
+
+"Make Y consistent with C and D by yanking up to end of line
+nnoremap Y y$
 
 "Smart way to move between windows
 nnoremap <C-j> <C-W>j
@@ -312,6 +335,10 @@ endif
 "Set terminal title
 set title
 
+"Highlight the current line and column
+set cursorline
+set cursorcolumn
+
 "Set # of lines visible around the cursor when scrolling vertically
 set scrolloff=3
 
@@ -341,6 +368,9 @@ set number
 
 "Change buffer without saving
 set hidden
+
+"Switch to existing tab then window when switching buffers
+set switchbuf=usetab
 
 "Set backspace to work in more situations
 set backspace=eol,start,indent
