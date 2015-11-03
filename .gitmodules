@@ -58,3 +58,6 @@
 	path = bundle/jsx
 	url = https://github.com/mxw/vim-jsx.git
 	branch = master
+[submodule "bundle/rust"]
+	path = bundle/rust
+	url = https://github.com/rust-lang/rust.vim.git
