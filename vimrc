@@ -295,7 +295,7 @@ if !exists("autocommands_loaded")
     autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
     autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
-    autocmd FileType html,css,javascript setlocal sw=2 ts=2
+    autocmd FileType html,css,scss,sass,javascript,htmljinja setlocal sw=2 ts=2
     autocmd FileType yaml setlocal sw=2 ts=2 et
 
     autocmd FileType rst setlocal sw=2 ts=2 et
