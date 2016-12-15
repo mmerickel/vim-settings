@@ -319,7 +319,7 @@ syntax on
 
 "Set background
 set background=dark
-colorscheme molokai
+colorscheme base16-default-dark
 
 if has("gui_running")
     if g:mysys == "mac"
