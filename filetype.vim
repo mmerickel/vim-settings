@@ -19,6 +19,9 @@ augroup filetypedetect
     au! BufRead,BufNewFile *.rs setf rust
     au! BufRead,BufNewFile Podfile,*.podspec setf ruby
     au! BufRead,BufNewFile wscript setf python
+    au! BufRead,BufNewFile Fastfile setf ruby
+    au! BufRead,BufNewFile Appfile setf ruby
+    au! BufRead,BufNewFile Deliverfile setf ruby
 augroup END
 
 let &cpo = s:cpo_save

@@ -111,6 +111,9 @@ nnoremap <leader>ej :set columns=130<cr>
 "Resize the window
 nnoremap <leader>eh :set columns=90<cr>
 
+"Redraw the window
+nnoremap <leader>rr :redraw!<cr>
+
 "Remap ` and ' for marking
 nnoremap ' `
 nnoremap ` '
