@@ -301,7 +301,7 @@ if !exists("autocommands_loaded")
     autocmd FileType html,css,scss,sass,javascript,htmljinja setlocal sw=2 ts=2
     autocmd FileType yaml setlocal sw=2 ts=2 et
 
-    autocmd FileType rst setlocal sw=2 ts=2 et
+    autocmd FileType rst setlocal sw=2 ts=2 et foldmethod=manual
 
 endif
 
@@ -431,6 +431,9 @@ set showcmd
 
 "Show more context when completing ctags
 set showfulltag
+
+"Do not fold blocks by default
+set foldmethod=manual
 
 "Setup higlighting of whitespace that shouldn't be there
 highlight ExtraWhitespace ctermbg=red guibg=red
