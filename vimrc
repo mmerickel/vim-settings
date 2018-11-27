@@ -295,10 +295,11 @@ if !exists("autocommands_loaded")
     autocmd FileType * set omnifunc=syntaxcomplete#Complete
     autocmd FileType python set omnifunc=pythoncomplete#Complete
     autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType javascript.jsx set omnifunc=javascriptcomplete#CompleteJS
     autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
     autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
-    autocmd FileType html,css,scss,sass,javascript,htmljinja setlocal sw=2 ts=2
+    autocmd FileType html,css,scss,sass,javascript,javascript.jsx,htmljinja setlocal sw=2 ts=2
     autocmd FileType yaml setlocal sw=2 ts=2 et
 
     autocmd FileType rst setlocal sw=2 ts=2 et foldmethod=manual
