@@ -299,7 +299,7 @@ if !exists("autocommands_loaded")
     autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
     autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
-    autocmd FileType html,css,scss,sass,javascript,javascript.jsx,htmljinja setlocal sw=2 ts=2
+    autocmd FileType html,css,scss,sass,javascript,javascript.jsx,htmljinja setlocal sw=2 ts=2 et
     autocmd FileType yaml setlocal sw=2 ts=2 et
 
     autocmd FileType rst setlocal sw=2 ts=2 et foldmethod=manual
@@ -498,11 +498,11 @@ endif
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     let g:syntastic_check_on_open = 1
     let g:syntastic_python_checkers = ['flake8']
-    let g:syntastic_python_flake8_args = '--ignore=E123,E261,E301,E302,E305,E306,E731,W503 --max-line-length=89'
+    let g:syntastic_python_flake8_args = '--ignore=E123,E261,E301,E302,E305,E306,E731,W503,W504 --max-line-length=89'
     let g:syntastic_full_redraws = 1
     "let g:syntastic_enable_signs = 0
-    "let g:syntastic_filetype_map = {
-    "    \ "javascript.jsx": "javascript" }
+    let g:syntastic_filetype_map = {
+        \ "javascript.jsx": "javascript" }
     let g:syntastic_javascript_checkers = ['eslint']
     let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint --quiet'
 
