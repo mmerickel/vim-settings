@@ -323,7 +323,9 @@ syntax on
 
 "Set background
 set background=dark
-colorscheme base16-default-dark
+let g:gruvbox_contrast_dark = "hard"
+let g:gruvbox_contrast_light = "hard"
+colorscheme gruvbox
 
 if has("gui_running")
     if g:mysys == "mac"
