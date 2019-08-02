@@ -300,6 +300,7 @@ if !exists("autocommands_loaded")
     autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
     autocmd FileType html,css,scss,sass,javascript,javascript.jsx,htmljinja setlocal sw=2 ts=2 et
+    autocmd FileType json setlocal sw=2 ts=2 et
     autocmd FileType yaml setlocal sw=2 ts=2 et
 
     autocmd FileType rst setlocal sw=2 ts=2 et foldmethod=manual
