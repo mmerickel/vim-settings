@@ -524,4 +524,4 @@ endif
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     let g:CommandTSmartCase = 1
     let g:CommandTFileScanner = 'watchman'
-    let g:CommandTWildIgnore = &wildignore .",*/node_modules,*/build,*/v?env,*/.git/*"
+    let g:CommandTWildIgnore = &wildignore .",*/node_modules,*/build,*/venv,*/env,*/.git/*"
