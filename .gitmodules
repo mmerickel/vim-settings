@@ -76,3 +76,9 @@
 [submodule "bundle/python"]
 	path = bundle/python
 	url = https://github.com/vim-python/python-syntax.git
+[submodule "bundle/nix"]
+	path = bundle/nix
+	url = https://github.com/LnL7/vim-nix.git
+[submodule "bundle/jinja"]
+	path = bundle/jinja
+	url = https://github.com/Glench/Vim-Jinja2-Syntax.git
