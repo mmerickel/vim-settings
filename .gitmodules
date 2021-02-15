@@ -73,3 +73,6 @@
 [submodule "bundle/command-t"]
 	path = bundle/command-t
 	url = https://github.com/wincent/command-t.git
+[submodule "bundle/python"]
+	path = bundle/python
+	url = https://github.com/vim-python/python-syntax.git
