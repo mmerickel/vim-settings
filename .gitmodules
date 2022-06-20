@@ -82,3 +82,6 @@
 [submodule "bundle/jinja"]
 	path = bundle/jinja
 	url = https://github.com/Glench/Vim-Jinja2-Syntax.git
+[submodule "bundle/jsonnet"]
+	path = bundle/jsonnet
+	url = https://github.com/google/vim-jsonnet
