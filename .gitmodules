@@ -30,10 +30,6 @@
 	path = bundle/javascript
 	url = https://github.com/pangloss/vim-javascript
 	branch = master
-[submodule "bundle/YouCompleteMe"]
-	path = bundle/YouCompleteMe
-	url = https://github.com/Valloric/YouCompleteMe
-	branch = master
 [submodule "bundle/Dockerfile"]
 	path = bundle/Dockerfile
 	url = https://github.com/ekalinin/Dockerfile.vim.git
