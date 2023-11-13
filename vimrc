@@ -254,17 +254,17 @@ if !exists("autocommands_loaded")
     if has("gui_running")
         autocmd GUIEnter * exec 'source '.g:vim_local.'/vimrc'
     endif
-    
+
     "Switch CWD based on current file
     "autocmd BufEnter * lcd %:p:h
-    
+
     "When vimrc is edited, reload it
     autocmd BufWritePost vimrc exec 'source '.g:vim_local.'/vimrc'
-    
+
     "Refresh syntax highlighting when buffer is entered or written
     autocmd BufEnter * syntax sync fromstart
     autocmd BufWritePost * syntax sync fromstart
-    
+
     " Have Vim jump to the last position when reopening a file
     autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
         \| exe "normal g'\"" | endif
@@ -325,9 +325,11 @@ syntax on
 
 "Set background
 set background=dark
-let g:gruvbox_contrast_dark = "hard"
-let g:gruvbox_contrast_light = "hard"
-colorscheme gruvbox
+" let g:gruvbox_contrast_dark = "hard"
+" let g:gruvbox_contrast_light = "hard"
+" colorscheme gruvbox
+" colorscheme molokai
+colorscheme codedark
 
 if has("gui_running")
     if g:mysys == "mac"

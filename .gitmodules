@@ -81,3 +81,6 @@
 [submodule "bundle/jsonnet"]
 	path = bundle/jsonnet
 	url = https://github.com/google/vim-jsonnet
+[submodule "bundle/vim-code-dark"]
+	path = bundle/vim-code-dark
+	url = https://github.com/tomasiser/vim-code-dark.git
