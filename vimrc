@@ -39,10 +39,6 @@ set autoread
 set nobackup
 set noswapfile
 
-"Use 'ack' for grep
-set grepprg=ack
-set grepformat=%f:%l:%m
-
 "Update time for various features
 set updatetime=1000
 
@@ -244,6 +240,9 @@ nnoremap <leader>cd cd %:p:h<CR>
 "Switch CWD based on current file only for current buffer
 nnoremap <leader>lcd lcd %:p:h<CR>
 
+"Open ripgrep window to search whole project
+nnoremap <leader>/ :Rg 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Autocommands
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -254,9 +253,6 @@ if !exists("autocommands_loaded")
     if has("gui_running")
         autocmd GUIEnter * exec 'source '.g:vim_local.'/vimrc'
     endif
-
-    "Switch CWD based on current file
-    "autocmd BufEnter * lcd %:p:h
 
     "When vimrc is edited, reload it
     autocmd BufWritePost vimrc exec 'source '.g:vim_local.'/vimrc'
@@ -469,12 +465,15 @@ endif
     nnoremap <leader>ff :CtrlP<cr>
     nnoremap <leader>fb :CtrlPBuffer<cr>
     let g:ctrlp_switch_buffer = 1
-    let g:ctrlp_custom_ignore = 'env\|.tox'
     let g:ctrlp_max_files = 0
     let g:ctrlp_max_depth = 50
     "If the CWD has git submodules, try to set working path based on
     "the CWD instead of the local submodule
-    let g:ctrlp_working_path_mode = 'wra'
+    let g:ctrlp_working_path_mode = 'ra'
+    if executable('fd')
+        let g:ctrlp_user_command = 'fd --type f --hidden --exclude .git --exclude .hg --exclude .svn --color never "" %s'
+        let g:ctrlp_use_caching = 0
+    endif
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " => HTML Indent
@@ -534,3 +533,16 @@ endif
     let g:CommandTSmartCase = 1
     let g:CommandTFileScanner = 'watchman'
     let g:CommandTWildIgnore = &wildignore .",*/node_modules,*/build,*/venv,*/env,*/.git/*"
+
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " => ripgrep
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    let g:rg_highlight = 1
+    let g:rg_derive_root = 1
+
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " => rooter
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    let g:rooter_cd_cmd = 'lcd'
+    let g:rooter_patterns = ['.git', '.hg', '.svn']
+    let g:rooter_buftypes = ['']

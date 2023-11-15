@@ -84,3 +84,9 @@
 [submodule "bundle/vim-code-dark"]
 	path = bundle/vim-code-dark
 	url = https://github.com/tomasiser/vim-code-dark.git
+[submodule "bundle/ripgrep"]
+	path = bundle/ripgrep
+	url = https://github.com/jremmen/vim-ripgrep.git
+[submodule "bundle/rooter"]
+	path = bundle/rooter
+	url = https://github.com/airblade/vim-rooter.git
