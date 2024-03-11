@@ -10,14 +10,6 @@
 	path = bundle/surround
 	url = https://github.com/tpope/vim-surround
 	branch = master
-[submodule "bundle/syntastic"]
-	path = bundle/syntastic
-	url = https://github.com/scrooloose/syntastic
-	branch = master
-[submodule "bundle/solarized"]
-	path = bundle/solarized
-	url = https://github.com/altercation/vim-colors-solarized
-	branch = master
 [submodule "bundle/pathogen"]
 	path = bundle/pathogen
 	url = https://github.com/tpope/vim-pathogen
@@ -90,3 +82,7 @@
 [submodule "bundle/rooter"]
 	path = bundle/rooter
 	url = https://github.com/airblade/vim-rooter.git
+[submodule "bundle/coc"]
+	path = bundle/coc
+	url = https://github.com/neoclide/coc.nvim
+	branch = release

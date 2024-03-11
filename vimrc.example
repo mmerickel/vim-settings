@@ -5,8 +5,3 @@ let g:vim_local = '~/.vim'
 "Not necessary if the repo is already installed in VIM's runtime path.
 exec 'set runtimepath^='.g:vim_local
 exec 'source '.g:vim_local.'/vimrc'
-
-"let g:syntastic_python_flake8_exec = '~/.python/python-2.7/bin/flake8'
-
-"let Tlist_Inc_Winwidth = 1
-"let Tlist_Ctags_Cmd = "/usr/local/ctags/bin/ctags"

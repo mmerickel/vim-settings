@@ -42,6 +42,9 @@ set noswapfile
 "Update time for various features
 set updatetime=1000
 
+" always show the signcolumn otherwise coc will hide/show it all the time
+set signcolumn=yes
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text Options
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -185,45 +188,6 @@ endfunction
 vnoremap <silent> * :call VisualSearch("f")<CR>
 vnoremap <silent> # :call VisualSearch("b")<CR>
 
-" Remap TAB to insert spaces if there is text preceding the cursor
-function! InsertTab()
-    if strpart(getline('.'), 0, col('.') - 1) =~ '\S'
-        let num_spaces = &ts - (virtcol('.') - 1) % &ts
-        return repeat(' ', num_spaces)
-    else
-        return "\<tab>"
-    endif
-endfunction
-
-inoremap <tab> <c-r>=InsertTab()<cr>
-
-" function to regenerate all tag types (ctags, cscope) for cwd
-function! RegenerateTags()
-    let tags = []
-    " use the ctags found by taglist if it exists
-    if exists('g:Tlist_Ctags_Cmd')
-        let ctags = g:Tlist_Ctags_Cmd
-    else
-        let ctags = 'ctags'
-    endif
-
-    if executable(ctags)
-        call system(ctags . ' -R --c++-kinds=+p --fields=+iaS --extra=+q --python-kinds=-i .')
-        if (v:shell_error)
-            echoerr "Error executing ctags"
-        else
-            call add(tags, ctags)
-        endif
-    endif
-
-    if executable('cscope')
-        " TODO
-    endif
-
-    echomsg "Tags generated: " . join(tags, ', ')
-endfunction
-nnoremap <leader>rt :call RegenerateTags()<CR>
-
 "Function to execute a file beginning with a shebang
 function! RunShebang()
   if (match(getline(1), '^\#!') == 0)
@@ -233,12 +197,6 @@ function! RunShebang()
   endif
 endfunction
 nnoremap <leader>ex :call RunShebang()<CR>
-
-"Switch CWD based on current file
-nnoremap <leader>cd cd %:p:h<CR>
-
-"Switch CWD based on current file only for current buffer
-nnoremap <leader>lcd lcd %:p:h<CR>
 
 "Open ripgrep window to search whole project
 nnoremap <leader>/ :Rg 
@@ -288,12 +246,12 @@ if !exists("autocommands_loaded")
     autocmd BufLeave *.c,*.cpp,*.h,*.hpp,*.cxx,*.hxx,*.m,*.mm,*.java set cindent&
 
     "Enable omni completion
-    autocmd FileType * set omnifunc=syntaxcomplete#Complete
-    autocmd FileType python set omnifunc=pythoncomplete#Complete
-    autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType javascript.jsx set omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+    "autocmd FileType * set omnifunc=syntaxcomplete#Complete
+    "autocmd FileType python set omnifunc=pythoncomplete#Complete
+    "autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+    "autocmd FileType javascript.jsx set omnifunc=javascriptcomplete#CompleteJS
+    "autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+    "autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
     autocmd FileType html,css,scss,sass,javascript,javascript.jsx,htmljinja setlocal sw=2 ts=2 et
     autocmd FileType json setlocal sw=2 ts=2 et
@@ -499,25 +457,6 @@ endif
     nnoremap <leader>do :NERDTreeToggle<cr>
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " => Python Syntax Highlighting
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    let g:python_highlight_func_calls = 0
-    let g:python_highlight_all = 1
-
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " => Syntastic
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    let g:syntastic_check_on_open = 1
-    let g:syntastic_python_checkers = ['flake8']
-    let g:syntastic_python_flake8_args = '--ignore=E123,E203,E261,E301,E302,E305,E306,E731,W503,W504 --max-line-length=89'
-    let g:syntastic_full_redraws = 1
-    "let g:syntastic_enable_signs = 0
-    let g:syntastic_filetype_map = {
-        \ "javascript.jsx": "javascript" }
-    let g:syntastic_javascript_checkers = ['eslint']
-    let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint --quiet'
-
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " => JSX
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     let g:jsx_ext_required = 0
@@ -546,3 +485,60 @@ endif
     let g:rooter_cd_cmd = 'lcd'
     let g:rooter_patterns = ['.git', '.hg', '.svn']
     let g:rooter_buftypes = ['']
+
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " => CoC
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " Use tab for trigger completion with characters ahead and navigate
+    " NOTE: There's always complete item selected by default, you may want to enable
+    " no select by `"suggest.noselect": true` in your configuration file
+    " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+    " other plugin before putting this into your config
+    inoremap <silent><expr> <TAB>
+        \ coc#pum#visible() ? coc#pum#next(1) :
+        \ CheckBackspace() ? "\<Tab>" :
+        \ coc#refresh()
+    inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+    " Make <CR> to accept selected completion item or notify coc.nvim to format
+    " <C-g>u breaks current undo, please make your own choice
+    inoremap <silent><expr> <CR>
+        \ coc#pum#visible() ? coc#pum#confirm()
+        \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+    function! CheckBackspace() abort
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1]  =~# '\s'
+    endfunction
+
+    " Use <c-space> to trigger completion
+    if has('nvim')
+        inoremap <silent><expr> <c-space> coc#refresh()
+    else
+        inoremap <silent><expr> <c-@> coc#refresh()
+    endif
+
+    " Use `[g` and `]g` to navigate diagnostics
+    " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
+    nmap <silent> [g <Plug>(coc-diagnostic-prev)
+    nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+    " GoTo code navigation
+    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gy <Plug>(coc-type-definition)
+    nmap <silent> gi <Plug>(coc-implementation)
+    nmap <silent> gr <Plug>(coc-references)
+
+    " Highlight the symbol and its references when holding the cursor
+    autocmd CursorHold * silent call CocActionAsync('highlight')
+
+    set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+    "if has('nvim-0.4.0') || has('patch-8.2.0750')
+      nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+      nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+      inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+      inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+      vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+      vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+    "endif
