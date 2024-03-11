@@ -316,7 +316,7 @@ set wildmode=list:longest,full
 set wildignore+=*.jpg,*.gif,*.png,*.hdr,*.gz
 set wildignore+=*.o,*.obj,*.so,*.a,*.dll,*.dylib
 set wildignore+=.DS_Store,Thumbs.db
-set wildignore+=*.svn,*.git,*.swp,*.pyc,*.class,*/__pycache__/*
+set wildignore+=*.svn,*.git,*.swp,*.pyc,*.class,*/__pycache__/*,*/.ruff_cache/*
 
 "Always show current position
 set ruler
@@ -447,7 +447,7 @@ endif
         \ '\.jpg$', '\.gif$', '\.png$', '\.hdr$', '\.gz$'
         \ , '\.o$', '\.obj$', '\.so$', '\.a$', '\.dll$', '\.dylib$'
         \ , '\.svn$', '\.git$', '\.swp$', '\.pyc$', '\.DS_Store'
-        \ , '\.class$', '__pycache__' ]
+        \ , '\.class$', '__pycache__', '.ruff_cache' ]
     let NERDTreeWinPos = "right"
     let NERDTreeQuitOnOpen = 0
     let NERDTreeHighlightCursorline = 1
