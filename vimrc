@@ -512,11 +512,7 @@ endif
     endfunction
 
     " Use <c-space> to trigger completion
-    if has('nvim')
-        inoremap <silent><expr> <c-space> coc#refresh()
-    else
-        inoremap <silent><expr> <c-@> coc#refresh()
-    endif
+    inoremap <silent><expr> <c-space> coc#refresh()
 
     " Use `[g` and `]g` to navigate diagnostics
     " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
@@ -534,11 +530,12 @@ endif
 
     set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-    "if has('nvim-0.4.0') || has('patch-8.2.0750')
+    " Attempt to bind hotkeys for floating windows
+    if has('nvim-0.4.0') || has('patch-8.2.0750')
       nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
       nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
       inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
       inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
       vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
       vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-    "endif
+    endif
