@@ -1,6 +1,8 @@
 VIM Settings
 ============
 
+:alert: **Moved to my dotfiles repo at https://github.com/mmerickel/dotfiles**
+
 This is a cross-platform configuration that allows for system-specific
 configuration without dirtying the repository.
 
